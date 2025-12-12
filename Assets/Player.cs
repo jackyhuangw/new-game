@@ -45,11 +45,9 @@ public class Player : MonoBehaviour
     {
         Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, whatIsEnemy);
 
-        if (attackPoint == null) Debug.LogError("AttackPoint belum di-assign");
-
         foreach (Collider2D enemy in enemyColliders)
         {
-            var enemyComp = enemy.GetComponent<Enemy>(); if (enemyComp == null) Debug.LogError("Collider tanpa Enemy: " + enemy.name); else enemyComp.TakeDamage();
+            enemy.GetComponent<Enemy>().TakeDamage();
         }
     }
 
