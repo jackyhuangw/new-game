@@ -1,9 +1,16 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
+
+
+    [Header("Attack details")]
+    [SerializeField] private float attackRadius;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private LayerMask whatIsEnemy;
     
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 3.5f;
@@ -32,6 +39,18 @@ public class Player : MonoBehaviour
         HandleMovement();
         HandleAnimations();
         HandleFlip();
+    }
+
+    public void DamageEnemies()
+    {
+        Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, whatIsEnemy);
+
+        if (attackPoint == null) Debug.LogError("AttackPoint belum di-assign");
+
+        foreach (Collider2D enemy in enemyColliders)
+        {
+            var enemyComp = enemy.GetComponent<Enemy>(); if (enemyComp == null) Debug.LogError("Collider tanpa Enemy: " + enemy.name); else enemyComp.TakeDamage();
+        }
     }
 
     public void EnableMovementAndJump(bool enable)
@@ -100,5 +119,6 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDistance));
+        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
     }
 }
