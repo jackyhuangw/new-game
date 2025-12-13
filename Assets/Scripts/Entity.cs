@@ -79,10 +79,10 @@ public class Entity : MonoBehaviour
             TryToJump();
 
         if (Input.GetKeyDown(KeyCode.Space))
-            TryToAttack();
+            HandleAttack();
     }
 
-    protected virtual void TryToAttack()
+    protected virtual void HandleAttack()
     {
         if (isGrounded)
             anim.SetTrigger("attack");
