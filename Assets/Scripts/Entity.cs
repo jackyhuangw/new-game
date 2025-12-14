@@ -12,7 +12,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private int maxHealth = 1;
     [SerializeField] private int currentHealth;
     [SerializeField] private Material damageMaterial;
-    [SerializeField] private float damageFeedbackDuration = .2f;
+    [SerializeField] private float damageFeedbackDuration = .1f;
     private Coroutine damageFeedbackCoroutine;
 
 
@@ -26,7 +26,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private float jumpForce = 8;
     protected int facingDir = 1;
     private float xInput;
-    private bool facingRight = true;
+    protected bool facingRight = true;
     protected bool canMove = true;
     private bool canJump = true;
 
@@ -154,7 +154,7 @@ public class Entity : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
     }
 
-    protected void HandleFlip()
+    protected virtual void HandleFlip()
     {
         if (rb.linearVelocity.x > 0 && facingRight == false)
             Flip();
@@ -162,7 +162,7 @@ public class Entity : MonoBehaviour
             Flip();
     }
 
-    private void Flip()
+    protected void Flip()
     {
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
@@ -172,6 +172,8 @@ public class Entity : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDistance));
-        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+
+        if(attackPoint != null)
+            Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
     }
 }
