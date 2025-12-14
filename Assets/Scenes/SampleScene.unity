@@ -214,8 +214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ac032c81f0f4a69bf6d37d71012201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  maxHealth: 1
+  maxHealth: 5
   currentHealth: 0
+  damageMaterial: {fileID: 2100000, guid: 639fbc0cec97e4989ae6e256874b9818, type: 2}
+  damageFeedbackDuration: 0.2
   attackRadius: 1.26
   attackPoint: {fileID: 911028110}
   whatIsTarget:
@@ -710,6 +712,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   maxHealth: 10
   currentHealth: 0
+  damageMaterial: {fileID: 2100000, guid: 639fbc0cec97e4989ae6e256874b9818, type: 2}
+  damageFeedbackDuration: 0.2
   attackRadius: 0.8
   attackPoint: {fileID: 1658170740}
   whatIsTarget:
