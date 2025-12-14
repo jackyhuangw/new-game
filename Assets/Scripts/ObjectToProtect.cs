@@ -6,7 +6,7 @@ public class ObjectToProtect : Entity
     protected override void Awake()
     {
         base.Awake();
-        
+
         player = FindFirstObjectByType<Player>().transform;
     }
     protected override void Update()
@@ -20,8 +20,14 @@ public class ObjectToProtect : Entity
             return;
 
         if (player.transform.position.x > transform.position.x && facingRight == false)
-                Flip();
-            else if (player.transform.position.x < transform.position.x && facingRight == true)
-                Flip();
+            Flip();
+        else if (player.transform.position.x < transform.position.x && facingRight == true)
+            Flip();
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        UI.instance.EnableGameOverUI();
     }
 }

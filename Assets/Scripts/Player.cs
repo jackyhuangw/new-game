@@ -43,4 +43,10 @@ public class Player : Entity
         if (isGrounded && canJump)
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        UI.instance.EnableGameOverUI();
+    }
 }

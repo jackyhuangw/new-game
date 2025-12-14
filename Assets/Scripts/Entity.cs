@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+
     protected Animator anim;
     protected Rigidbody2D rb;
     protected Collider2D col;
@@ -78,7 +79,7 @@ public class Entity : MonoBehaviour
         if (currentHealth <= 0)
             Die();
     }
-    protected void Die()
+    protected virtual void Die()
     {
         anim.enabled = false;
         col.enabled = false;
@@ -130,7 +131,7 @@ public class Entity : MonoBehaviour
         else if (rb.linearVelocity.x < 0 && facingRight == true)
             Flip();
     }
-    protected void Flip()
+    public void Flip()
     {
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
